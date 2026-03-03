@@ -1,0 +1,133 @@
+<style>
+  /* ── Home page ── */
+  .home-hero {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    background: var(--gold-dim); border: 1px solid rgba(255,201,71,0.2);
+    border-radius: 20px; padding: 4px 12px; margin-bottom: 1rem;
+  }
+  .hero-title {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--bright); letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem; color: var(--dim); max-width: 480px; line-height: 1.7;
+  }
+
+  /* ── Section heading ── */
+  .section-head {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 1.4rem;
+  }
+  .section-head::before {
+    content:''; display:block;
+    width: 3px; height: 14px; border-radius: 2px;
+    background: linear-gradient(to bottom, var(--gold), #ff9f43);
+  }
+
+  /* ── Create article panel ── */
+  .create-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: var(--r);
+    padding: 1.8rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .create-panel h2 {
+    font-family: var(--sans); font-weight: 700; font-size: 1.1rem;
+    color: var(--bright); margin-bottom: 0.3rem;
+  }
+  .create-panel .create-sub {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--dim); margin-bottom: 1.4rem;
+  }
+  .form-row { margin-bottom: 1.1rem; }
+
+  /* ── Article grid ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .article-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.4rem 1.5rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.18s, box-shadow 0.18s;
+    text-decoration: none;
+  }
+  .article-card:hover {
+    border-color: rgba(255,201,71,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .card-meta {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--dim); margin-bottom: 0.65rem;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .card-meta .author-chip {
+    background: var(--gold-dim); border: 1px solid rgba(255,201,71,0.2);
+    color: var(--gold); padding: 2px 8px; border-radius: 4px;
+  }
+
+  .card-title {
+    font-family: var(--sans); font-weight: 700; font-size: 1.05rem;
+    color: var(--bright); line-height: 1.3;
+    margin-bottom: 0.7rem;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-excerpt {
+    font-size: 13px; color: var(--dim); line-height: 1.6; flex: 1;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden; margin-bottom: 1rem;
+  }
+
+  .card-cta {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--cyan); letter-spacing: 0.08em;
+    display: flex; align-items: center; gap: 5px;
+    margin-top: auto;
+  }
+
+  .no-articles {
+    grid-column: 1/-1; text-align: center;
+    padding: 4rem 1rem; color: var(--dim);
+    font-family: var(--mono); font-size: 13px;
+  }
+</style>
+
+<!-- ── Hero ── -->
+<div class="home-hero fade-in">
+  <div class="hero-eyebrow">🌊 CS Knowledge Hub</div>
+  <h1 class="hero-title">Where developers<br/>read &amp; write <span>CS insights</span></h1>
+  <p class="hero-sub">Curated articles on algorithms, architecture, tools, and best practices — written by developers, for developers.</p>
+</div>
+
+<!-- ── Create Article (author only) ── -->
+{{CREATE_FORM}}
+
+<!-- ── Articles section ── -->
+<div class="section-head fade-in d1">Latest Articles</div>
+
+<div class="articles-grid">
+  {{ARTICLES_LIST}}
+</div>

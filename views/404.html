@@ -1,0 +1,34 @@
+<style>
+  .error-wrap { text-align: center; padding: 5rem 1rem; }
+  .error-code {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(6rem, 20vw, 11rem);
+    color: var(--border2); line-height: 1;
+    display: block; margin-bottom: 0;
+  }
+  .error-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin: 0.5rem 0 1.2rem;
+  }
+  .error-msg {
+    font-size: 1rem; color: var(--dim);
+    margin-bottom: 2rem; font-style: italic;
+  }
+  .btn-home {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--gold-dim); border: 1px solid rgba(255,201,71,0.25);
+    color: var(--gold); border-radius: 6px;
+    padding: 0.6rem 1.6rem; text-decoration: none;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    transition: background 0.15s;
+  }
+  .btn-home:hover { background: rgba(255,201,71,0.18); color: var(--gold); }
+</style>
+
+<div class="error-wrap fade-in">
+  <span class="error-code">404</span>
+  <p class="error-label">Page not found</p>
+  <p class="error-msg">This page got lost somewhere along the Nile.</p>
+  <a href="/" class="btn-home">&#8592; Return Home</a>
+</div>

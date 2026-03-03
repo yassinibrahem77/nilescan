@@ -1,0 +1,48 @@
+<style>
+  .article-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    color: var(--dim); text-decoration: none;
+    margin-bottom: 2rem; transition: color 0.15s;
+  }
+  .article-back:hover { color: var(--gold); }
+  .article-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem; margin-bottom: 2rem; max-width: 760px;
+  }
+  .article-eyebrow {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 11px; color: var(--dim); margin-bottom: 1rem;
+  }
+  .eyebrow-author {
+    background: var(--gold-dim); border: 1px solid rgba(255,201,71,0.2);
+    color: var(--gold); padding: 3px 10px; border-radius: 4px;
+  }
+  .eyebrow-date {
+    background: var(--surface2); border: 1px solid var(--border2);
+    padding: 3px 10px; border-radius: 4px;
+  }
+  .article-title {
+    font-family: var(--sans); font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--bright); line-height: 1.15; letter-spacing: -0.025em;
+  }
+  .article-body { max-width: 720px; font-size: 1.05rem; line-height: 1.85; color: #c0cce0; }
+  .article-body p { margin-bottom: 1.4rem; }
+  .article-body p:last-child { margin-bottom: 0; }
+</style>
+
+<a href="/" class="article-back fade-in">&#8592; Back to articles</a>
+
+<article>
+  <header class="article-header fade-in d1">
+    <div class="article-eyebrow">
+      <span class="eyebrow-author">&#9997; {{ARTICLE_AUTHOR}}</span>
+      <span class="eyebrow-date">{{ARTICLE_DATE}}</span>
+    </div>
+    <h1 class="article-title">{{ARTICLE_TITLE}}</h1>
+  </header>
+  <div class="article-body fade-in d2">
+    {{ARTICLE_PARAGRAPHS}}
+  </div>
+</article>

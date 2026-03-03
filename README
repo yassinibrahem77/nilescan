@@ -1,7 +1,118 @@
+# NileScan — CS Knowledge Hub
 
+> Like the Nile flows through Egypt, NileScan flows through computer science — a developer-focused article platform where authors publish CS insights and readers explore them.
 
-   Assignment starting code may be updated when the assignment is released.
+---
 
-   Please check Brightspace for information.
+## Student Details
 
+- **Full Name:** Yassin Ibrahem
+- **Student Number:** B00940619
+- **Email:** ys743518@dal.ca
 
+---
+
+## GitLab Link
+
+https://git.cs.dal.ca/courses/2026-winter/csci-2170/assignments/a2/ibrahem.git
+---
+
+## Application
+
+**Name:** NileScan — CS Knowledge Hub
+
+**Description:**
+NileScan is a Node.js web application (built using core modules only) that serves as a computer science article platform. Visitors can browse and read CS articles without an account. Registered users can sign in and out. Authors (a privileged role) can additionally publish new articles directly from the home page. User authentication is simulated using a server-side `session.json` file as specified in the assignment.
+
+---
+
+## Application Features
+
+- **Home Page (`/`)** — Displays all articles as cards sorted newest-first. If the logged-in user is an `author`, a "Publish a New Article" form appears above the article grid. Regular users and guests see only the articles.
+- **Article Detail Page (`/article?id=N`)** — Renders the full content of the selected article with title, author, and date. Invalid or missing IDs return a 404 page.
+- **Login Page (`GET /login`)** — Sign-in form with username and password fields. Demo credentials are shown on the page.
+- **Login Handler (`POST /login`)** — Validates credentials against `data/users.json`. On success, writes `data/session.json` and redirects to home with a welcome flash message. On failure, redirects back to `/login` with an error flash message.
+- **Logout (`POST /logout`)** — Deletes `data/session.json`, ending the session. Redirects to home with a confirmation flash message.
+- **Create Article (`POST /create`)** — Accepts title and content from the home-page form. Appends a new article object to `data/articles.json` with an auto-incremented ID, the logged-in author's username, and today's date. Restricted to `author` role only.
+- **Role-Based Access** — The create form is rendered only for `author` role users. `user` role and guests see no form and cannot POST to `/create`.
+- **Flash Messages** — Colour-coded feedback (info / success / error) passed as URL query params and rendered at the top of each page.
+- **404 Page** — Rendered for any unknown route or invalid article ID.
+- **Input Safety** — All form inputs are trimmed. Required fields are validated. Missing query parameters are handled gracefully. The server never crashes on malformed requests.
+
+---
+
+## Creative Curiosity Corner Attempted?
+
+No.
+
+---
+
+## Set up and Testing Instructions
+
+### Prerequisites
+
+- Node.js v18 or later installed on your machine.
+- No `npm install` is required — the project uses zero external packages.
+
+### Steps
+
+1. **Clone or download** the project so the `a2/` folder is on your machine.
+
+2. **Confirm the data files exist:**
+   ```
+   a2/data/articles.json   ← pre-populated with 6 CS articles
+   a2/data/users.json      ← pre-populated with 3 accounts
+   ```
+   > `data/session.json` is intentionally absent and git-ignored. It is created automatically on login.
+
+3. **Start the server:**
+   ```bash
+   cd a2
+   node src/server.js
+   ```
+   You should see:
+   ```
+   🌊 NileScan is running at http://localhost:3000
+   ```
+
+4. **Open your browser** and go to: [http://localhost:3000](http://localhost:3000)
+
+5. **Test the following flows:**
+
+   | What to test | How |
+   |---|---|
+   | Browse articles (guest) | Visit `/` without logging in — cards are visible |
+   | Read an article | Click any article card |
+   | Invalid article | Visit `/article?id=9999` → 404 page |
+   | Login as author | `yassin` / `nile123` |
+   | Login as user | `reader` / `read456` |
+   | Publish an article | Login as author → fill the form on home → click Publish |
+   | Logout | Click **Sign Out** in the nav bar |
+   | Wrong credentials | Try any bad username/password → error flash |
+   | 404 route | Visit `/anything` → 404 page |
+
+6. **Stop the server:** Press `Ctrl + C` in your terminal.
+
+---
+
+## Other Information
+
+- `data/session.json` simulates a logged-in state. It is created on login and deleted on logout. It is listed in `.gitignore` and must not be committed.
+- The server runs on port `3000` by default. To change it, update the `PORT` constant at the top of `src/server.js`.
+- No Express, no EJS, no Handlebars, no npm packages — only Node.js built-in modules: `http`, `fs`, `path`, `url`.
+- Flash messages are passed as URL query parameters (`?flash=...&ft=success`) and rendered in the page header.
+
+---
+
+## References / Citations
+
+| Resource | URL | License |
+|---|---|---|
+| Bootstrap 5.3 CSS (CDN) | https://getbootstrap.com/ | MIT |
+| Bootstrap 5.3 JS Bundle (CDN) | https://getbootstrap.com/ | MIT |
+| Bootstrap CDN integrity hashes | https://www.bootstrapcdn.com/ | — |
+| Google Fonts — JetBrains Mono | https://fonts.google.com/specimen/JetBrains+Mono | SIL OFL |
+| Google Fonts — Outfit | https://fonts.google.com/specimen/Outfit | SIL OFL |
+| Node.js `http` docs | https://nodejs.org/api/http.html | Node.js Foundation |
+| Node.js `fs` docs | https://nodejs.org/api/fs.html | Node.js Foundation |
+| Node.js `url` docs | https://nodejs.org/api/url.html | Node.js Foundation |

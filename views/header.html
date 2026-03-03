@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{PAGE_TITLE}} — NileScan</title>
+
+  <!--
+    Bootstrap 5.3 via CDN
+    Source : https://getbootstrap.com/
+    License: MIT — https://github.com/twbs/bootstrap/blob/main/LICENSE
+  -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"/>
+
+  <!--
+    Google Fonts: JetBrains Mono + Outfit
+    License: SIL Open Font License
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --bg:        #07090f;
+      --surface:   #0e1118;
+      --surface2:  #141824;
+      --border:    #1c2236;
+      --border2:   #252d45;
+      --text:      #b8c4de;
+      --dim:       #4a5572;
+      --bright:    #e8eeff;
+      --cyan:      #00d4ff;
+      --cyan-dim:  rgba(0,212,255,0.10);
+      --gold:      #ffc947;
+      --gold-dim:  rgba(255,201,71,0.10);
+      --red:       #ff5f7e;
+      --green:     #00e5a0;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Outfit', sans-serif;
+      --r:         8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* Dot-grid texture */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(circle, rgba(0,212,255,0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient glow top-left */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -250px; left: -150px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,201,71,0.04) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .z1 { position: relative; z-index: 1; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    /* ── Navbar ── */
+    .site-nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(7,9,15,0.90);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+    }
+
+    .nav-inner {
+      width: 100%; max-width: 1140px;
+      margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--gold), #ff9f43);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-weight: 600; font-size: 13px; color: #000;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: var(--sans); font-weight: 800; font-size: 1.15rem;
+      color: var(--bright); letter-spacing: -0.02em; line-height: 1.1;
+    }
+    .logo-text span { color: var(--gold); }
+    .logo-tagline {
+      font-family: var(--mono); font-size: 9px;
+      color: var(--dim); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex; align-items: center; gap: 0.25rem;
+    }
+    .nav-links a {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--dim); text-decoration: none;
+      padding: 0.4rem 0.85rem; border-radius: 5px;
+      letter-spacing: 0.06em;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
+    .nav-links a.active { color: var(--gold); }
+
+    /* Auth area */
+    .nav-auth {
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .nav-user-pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 20px; padding: 4px 12px 4px 8px;
+      font-family: var(--mono); font-size: 11px; color: var(--dim);
+    }
+    .nav-user-pill .u-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .nav-user-pill .u-dot.author { background: var(--gold); }
+    .nav-user-pill .u-dot.user   { background: var(--cyan); }
+    .nav-user-pill .u-name { color: var(--text); }
+    .nav-user-pill .u-role {
+      font-size: 10px; color: var(--dim);
+      background: var(--border); padding: 1px 6px; border-radius: 3px; margin-left: 2px;
+    }
+    .nav-user-pill .u-role.author { color: var(--gold); background: var(--gold-dim); }
+
+    .btn-nav {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      padding: 0.38rem 1rem; border-radius: 5px; cursor: pointer;
+      text-decoration: none; border: none; transition: all 0.15s;
+    }
+    .btn-signin {
+      background: transparent; color: var(--dim);
+      border: 1px solid var(--border2);
+    }
+    .btn-signin:hover { color: var(--text); border-color: var(--border2); background: var(--surface2); }
+    .btn-signout {
+      background: rgba(255,95,126,0.12); color: var(--red);
+      border: 1px solid rgba(255,95,126,0.2);
+    }
+    .btn-signout:hover { background: rgba(255,95,126,0.2); }
+
+    /* ── Page wrapper ── */
+    .page-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* ── Flash message ── */
+    .flash-msg {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,201,71,0.08);
+      border: 1px solid rgba(255,201,71,0.25);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--r);
+      padding: 0.75rem 1.1rem;
+      font-family: var(--mono); font-size: 12px;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+    .flash-msg.error {
+      background: rgba(255,95,126,0.08);
+      border-color: rgba(255,95,126,0.25);
+      border-left-color: var(--red);
+      color: var(--red);
+    }
+    .flash-msg.success {
+      background: rgba(0,229,160,0.08);
+      border-color: rgba(0,229,160,0.25);
+      border-left-color: var(--green);
+      color: var(--green);
+    }
+
+    /* ── Shared form styles ── */
+    .ns-label {
+      display: block;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 6px;
+    }
+    .ns-input, .ns-textarea {
+      width: 100%; background: var(--surface2);
+      border: 1px solid var(--border2); border-radius: 6px;
+      color: var(--bright); font-family: var(--mono); font-size: 13px;
+      padding: 0.65rem 1rem; outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .ns-input::placeholder, .ns-textarea::placeholder { color: var(--dim); }
+    .ns-input:focus, .ns-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,201,71,0.1);
+    }
+    .ns-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #ff9f43);
+      color: #000; border: none; border-radius: 6px;
+      padding: 0.65rem 1.8rem;
+      font-family: var(--sans); font-weight: 700; font-size: 13px;
+      cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── Fade in ── */
+    .fade-in {
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp 0.45s forwards;
+    }
+    @keyframes fadeUp { to { opacity:1; transform:none; } }
+    .d1 { animation-delay: 0.06s; }
+    .d2 { animation-delay: 0.12s; }
+    .d3 { animation-delay: 0.18s; }
+    .d4 { animation-delay: 0.24s; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="site-nav">
+  <div class="nav-inner">
+
+    <a href="/" class="nav-logo">
+      <div class="logo-mark">NS</div>
+      <div>
+        <div class="logo-text">Nile<span>Scan</span></div>
+        <div class="logo-tagline">CS Knowledge Hub</div>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="/" class="{{HOME_ACTIVE}}">Home</a>
+    </div>
+
+    <div class="nav-auth">
+      {{NAV_AUTH}}
+    </div>
+
+  </div>
+</nav>
+
+<!-- ── Main content ── -->
+<div class="page-wrap z1">
+  {{FLASH_HTML}}

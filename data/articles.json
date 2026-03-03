@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Why Every Developer Should Understand Big-O Notation",
+    "content": "Big-O notation is the universal language of algorithmic efficiency. At its core, it describes how an algorithm's runtime or memory usage scales as the input size grows — not the exact time in milliseconds, but the growth curve.\n\nConsider searching for a name in an unsorted list of one million records. A linear scan (O(n)) checks each record one by one. A binary search on a sorted list (O(log n)) cuts the problem in half with every comparison, finding the answer in roughly 20 steps instead of a million.\n\nUnderstanding Big-O helps you make informed decisions: when to choose a hash map over an array, why merge sort outperforms bubble sort on large datasets, and how a single nested loop can turn a fast program into a slow one. These insights directly translate to writing software that scales.",
+    "author": "yassin",
+    "date": "2025-01-10"
+  },
+  {
+    "id": 2,
+    "title": "REST vs GraphQL: Choosing the Right API Architecture",
+    "content": "REST and GraphQL are two dominant approaches to building APIs, and each has a distinct philosophy. REST (Representational State Transfer) organizes data around resources — each endpoint represents a noun like /users or /articles. It is stateless, widely understood, and pairs naturally with HTTP caching.\n\nGraphQL, developed by Meta, takes a different approach: clients specify exactly what data they need in a single query. This eliminates over-fetching (getting too much data) and under-fetching (requiring multiple requests to assemble a complete view).\n\nFor simple CRUD applications with well-defined resources, REST is often the right choice. For complex frontends with diverse data needs — like a mobile app that needs a condensed profile summary — GraphQL shines. Many teams now run both: REST for public APIs, GraphQL for internal product development.",
+    "author": "admin",
+    "date": "2025-01-18"
+  },
+  {
+    "id": 3,
+    "title": "The Git Branching Strategy That Will Save Your Team",
+    "content": "Version control chaos is one of the most preventable sources of developer frustration. The solution is a clear, agreed-upon branching strategy — and Git Flow remains one of the most battle-tested options.\n\nThe core idea: main holds production-ready code, develop holds integrated features, and short-lived feature branches isolate individual work. When a feature is complete, it merges into develop via a pull request. Releases cut from develop get their own release branch for final testing, then merge into both main and develop.\n\nFor smaller teams or continuous delivery pipelines, GitHub Flow simplifies this to just main and feature branches. The key principle either way is that no one pushes directly to main. Pull requests enforce code review, catch bugs early, and create a documented history of decisions — habits that scale from two developers to two hundred.",
+    "author": "yassin",
+    "date": "2025-02-05"
+  },
+  {
+    "id": 4,
+    "title": "Understanding Recursion Through Real-World Problems",
+    "content": "Recursion is one of those concepts that feels circular until suddenly it clicks. The definition — a function that calls itself — is accurate but unhelpful. The better mental model: recursion solves a problem by breaking it into a smaller version of the same problem, plus a base case that stops the chain.\n\nThe classic example is computing factorial(n): to find 5!, you need 5 × 4!, and to find 4! you need 4 × 3!, and so on until you hit factorial(0) = 1 — the base case. Each call waits for the one below it to return before completing.\n\nWhere recursion truly earns its place is in tree and graph traversal. Navigating a file system, parsing HTML, searching a decision tree — these structures are naturally recursive, and recursive algorithms mirror their shape cleanly. Understanding recursion is a prerequisite for understanding depth-first search, dynamic programming, and divide-and-conquer algorithms.",
+    "author": "admin",
+    "date": "2025-02-19"
+  },
+  {
+    "id": 5,
+    "title": "What Is a REST API? A Plain-English Guide",
+    "content": "An API (Application Programming Interface) is a contract between two software systems: here is what you can ask me, here is what I will give back. A REST API applies that contract over HTTP, the same protocol your browser uses to load web pages.\n\nWhen your weather app shows today's forecast, it is sending an HTTP GET request to a weather API, which responds with JSON data. Your app reads that data and renders the UI. The API is the invisible bridge.\n\nRESTful APIs organize around four HTTP methods: GET to read, POST to create, PUT or PATCH to update, and DELETE to remove. A well-designed API is predictable: GET /articles returns a list, GET /articles/3 returns article #3, POST /articles creates a new one. This consistency is why REST became the default for web services — developers can guess how an unfamiliar API works before reading the documentation.",
+    "author": "yassin",
+    "date": "2025-03-01"
+  },
+  {
+    "id": 6,
+    "title": "Database Indexing: The Hidden Performance Lever",
+    "content": "Most developers know that SQL queries can be slow on large tables. Fewer understand why — and the fix often comes down to a single word: indexes.\n\nWithout an index, a database performs a full table scan: it reads every row to find the ones matching your WHERE clause. With an index on the relevant column, it jumps directly to matching rows using a data structure (typically a B-tree) that supports fast lookups.\n\nThe tradeoff is write performance. Every INSERT, UPDATE, or DELETE must also update the index, so over-indexing a write-heavy table creates overhead. The strategy: index columns that appear frequently in WHERE, JOIN, and ORDER BY clauses. Use EXPLAIN (in MySQL/PostgreSQL) or EXPLAIN ANALYZE to see whether your queries are using indexes or scanning the full table. A single well-placed index can turn a 10-second query into a 10-millisecond one.",
+    "author": "admin",
+    "date": "2025-03-14"
+  }
+]
