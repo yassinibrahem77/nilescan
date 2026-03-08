@@ -19,7 +19,7 @@ https://git.cs.dal.ca/courses/2026-winter/csci-2170/assignments/a2/ibrahem.git
 
 ## Application
 
-**Name:** NileScan — CS Knowledge Hub
+**Name:** NileScan CS Knowledge Hub
 
 **Description:**
 NileScan is a Node.js web application (built using core modules only) that serves as a computer science article platform. Visitors can browse and read CS articles without an account. Registered users can sign in and out. Authors (a privileged role) can additionally publish new articles directly from the home page. User authentication is simulated using a server-side `session.json` file as specified in the assignment.
@@ -42,8 +42,7 @@ NileScan is a Node.js web application (built using core modules only) that serve
 ---
 
 ## Creative Curiosity Corner Attempted?
-
-No.
+Yes.
 
 ---
 
@@ -80,16 +79,15 @@ No.
 5. **Test the following flows:**
 
    | What to test | How |
-   |---|---|
    | Browse articles (guest) | Visit `/` without logging in — cards are visible |
-   | Read an article | Click any article card |
-   | Invalid article | Visit `/article?id=9999` → 404 page |
-   | Login as author | `yassin` / `nile123` |
-   | Login as user | `reader` / `read456` |
-   | Publish an article | Login as author → fill the form on home → click Publish |
-   | Logout | Click **Sign Out** in the nav bar |
-   | Wrong credentials | Try any bad username/password → error flash |
-   | 404 route | Visit `/anything` → 404 page |
+   | Read an article         | Click any article card |
+   | Invalid article         | Visit `/article?id=9999` → 404 page |
+   | Login as author         | `yassin` / `nile123` |
+   | Login as user           | `reader` / `read456` |
+   | Publish an article      | Login as author → fill the form on home → click Publish |
+   | Logout                  | Click **Sign Out** in the nav bar |
+   | Wrong credentials       | Try any bad username/password → error flash |
+   | 404 route               | Visit `/anything` → 404 page |
 
 6. **Stop the server:** Press `Ctrl + C` in your terminal.
 
